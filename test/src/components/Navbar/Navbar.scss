@@ -1,0 +1,49 @@
+.header {
+    padding: 25px 0;
+    background: rgba(20, 20, 20, 0.50);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
+    & .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        &-link {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            &.router-link-exact-active {
+                color: #fff;
+            }
+            &.router-link-exact-active::after {
+                transform: scale(1);
+            }
+
+            &::after {
+                content: '';
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #149A03;
+                position: absolute;
+                top: 31px;
+                transition: .3s;
+                transform: scale(0);
+            }
+        }
+    }
+}
