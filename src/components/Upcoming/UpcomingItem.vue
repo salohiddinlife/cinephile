@@ -1,7 +1,7 @@
 <template>
   <Transition name="upcoming">
     <div class="upcoming__item" v-if="slideView == idx" @keyup.enter="$emit('nextSlide')">
-    <img :src="image + movie.backdrop_path" alt="" class="upcoming__item-img" />
+    <img v-lazy="image + movie.backdrop_path" alt="" class="upcoming__item-img" />
     <div class="upcoming__content">
       <h2 class="upcoming__content-title">{{movie.title}}</h2>
       <p class="upcoming__content-text">
@@ -10,7 +10,7 @@
       <BtnMore />
     </div>
     <div class="upcoming__next" @click="$emit('nextSlide')">
-      <img :src="image + nextMovie.backdrop_path" alt="" />
+      <img v-lazy="image + nextMovie.backdrop_path" alt="" />
       <div class="upcoming__next-content">
         <span>Следующий</span>
         <h2>{{ nextMovie.title }}</h2>
