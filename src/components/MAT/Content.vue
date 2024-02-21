@@ -21,6 +21,7 @@
         class="content__slide"
         v-for="item in content"
         :key="item.id"
+        @click="open(item)"
       >
         <img :src="image + item.poster_path" class="content__img" alt="" />
       </SwiperSlide>
@@ -31,11 +32,13 @@
         </RouterLink>
       </SwiperSlide>
     </Swiper>
+    <ItemBlock :isOpen ='isOpen' @close='close' :current="current"/>
   </div>
   <Loader v-else />
 </template>
 
 <script setup>
+import ItemBlock from "@/components/ItemBlock/ItemBlock.vue";
 import { miniImage, image } from "@/url";
 import { computed, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -43,10 +46,14 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { usePopular } from "@/store/popular";
+import { useItemById } from "@/store/itemById";
+
 const props = defineProps(["type"]);
 const modules = ref([Autoplay, Navigation]);
+let isOpen = ref(false);
 
 const popular = usePopular();
+const ItemByIdStore = useItemById();
 popular.getPopular({ type: props.type });
 
 const content = computed(() =>
@@ -72,6 +79,16 @@ const swiperOptions = ref({
     },
   },
 });
+let current = ref(null)
+const open = (item) => {
+  ItemByIdStore.getItemById({type:props.type, id: item.id})
+  current.value = ItemByIdStore.ItemById
+  isOpen.value = true;
+  console.log(ItemByIdStore.ItemById);
+};
+const close = ()=>{
+  isOpen.value = false
+}
 </script>
 
 <style lang="scss" scoped>

@@ -16,6 +16,7 @@
   gap: 15px;
   border-radius: 10px;
   background: #149a03;
+  width: max-content;
   &__text{
     color: white;
     font-size: 20px;
